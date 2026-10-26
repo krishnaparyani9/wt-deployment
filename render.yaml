@@ -3,7 +3,7 @@ services:
     name: atlas-crm-api
     runtime: node
     plan: free
-    buildCommand: npm install && npm run typecheck --workspace backend
+    buildCommand: npm install --include=dev && npm run typecheck --workspace backend
     startCommand: npm run start --workspace backend
     healthCheckPath: /api/health
     envVars:
