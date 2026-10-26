@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 
 export async function connectDatabase(uri: string | undefined): Promise<void> {
   if (!uri) {
-    console.warn('MONGODB_URI is not set. Configure it in .env to enable MongoDB persistence.');
-    return;
+    throw new Error('MONGODB_URI is not set. Configure it in backend/.env before starting the API.');
   }
 
   try {

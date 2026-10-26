@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: atlas-crm-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run typecheck --workspace backend
+    startCommand: npm run start --workspace backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        value: http://localhost:5173

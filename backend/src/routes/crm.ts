@@ -5,7 +5,11 @@ import CrmData from '../models/CrmData';
 const router = Router();
 
 router.get('/health', (_request, response) => {
-  response.json({ status: 'ok', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
+  const connected = mongoose.connection.readyState === 1;
+  response.status(connected ? 200 : 503).json({
+    status: connected ? 'ok' : 'unavailable',
+    database: connected ? 'connected' : 'disconnected',
+  });
 });
 
 router.get('/data', async (_request, response, next) => {

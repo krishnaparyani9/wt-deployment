@@ -37,6 +37,10 @@ atlas-crm/
 
 The frontend runs on port 5173 and proxies `/api` requests to the Express API on port 5001. All CRM records are loaded from and saved to MongoDB through the backend API. If MongoDB is unavailable, the application shows a connection error and does not use browser-local storage as a fallback.
 
+## Deployment
+
+See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for the MongoDB Atlas, Render, and Vercel setup steps.
+
 ## Commands
 
 - `npm run dev` from the project root or `frontend/` starts the frontend and backend in development mode. An already-running CRM API is reused; another app using port 5001 is reported clearly.
