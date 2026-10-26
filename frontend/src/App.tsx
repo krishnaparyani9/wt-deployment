@@ -31,7 +31,6 @@ function updateRecord<T extends { id: string }>(records: T[], entry: T, editingI
 
 function App() {
   const [data, setData] = useState<CrmData>(() => structuredClone(SEED_DATA));
-  const [databaseStatus, setDatabaseStatus] = useState('Connecting to MongoDB…');
   const [page, setPage] = useState<Page>('Dashboard');
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
@@ -44,13 +43,10 @@ function App() {
   async function refreshData() {
     setLoading(true);
     setLoadError('');
-    setDatabaseStatus('Connecting to MongoDB…');
     try {
       const result = await loadData();
       setData(result);
-      setDatabaseStatus('MongoDB connected');
     } catch (error) {
-      setDatabaseStatus('MongoDB unavailable');
       setLoadError(error instanceof Error ? error.message : 'Could not load CRM data from MongoDB.');
     } finally {
       setLoading(false);
@@ -202,8 +198,6 @@ function App() {
           <span className="brand-tag">ADMIN PORTAL</span>
         </a>
         <div className="topbar-right">
-          <span className={`connection-dot ${databaseStatus === 'MongoDB connected' ? 'connected' : ''}`} />
-          <span className="connection-label">{databaseStatus}</span>
           <button className="avatar-button" aria-label="Account menu">{initials(data.settings.companyName || 'Atlas CRM')}</button>
         </div>
       </header>
